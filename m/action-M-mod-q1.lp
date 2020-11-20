@@ -4,7 +4,7 @@
 time(1..horizon).
 
 direction((X,Y)) :- X=-1..1, Y=-1..1, { |X+Y|=1 ; |X+Y|=2 ; X+Y=0 }.
-nextto((X,Y),(X',Y'),(X+X',Y+Y')) :- position((X,Y)), direction((X',Y')), position((X+X',Y+Y')).
+nextto((X,Y),(X',Y'),(X+X',Y+Y')) :- position((X,Y)), direction((X',Y')), position((X+X',Y+Y')), (X', Y') != (0,0).
 
 { move(R,D,T) : direction(D) } 1 :- isRobot(R), time(T).
 
