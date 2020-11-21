@@ -15,7 +15,7 @@ consume(R,1,T)  :- putdown(   R, _, T), not carries(R, _,T).
 % *Consumption effect*
 % For each robot and time step, reflect the effect of its current consumption (via consume/3)
 % towards its current energy level (via energy/3)
-...
+energy(R,E,T) :- consume(R,A,T), energy(R,B,T-1), E=(B-A), not T=0.
 
 % *Inertia*
 % For each robot and time step, if no energy is currently consumed, the energy level
@@ -24,7 +24,7 @@ energy(R,E,T) :- energy(R,E,T-1), not move(R,_,T), not putdown(R,_,T), not carri
 
 % *Forbid Over-Consumption*
 % For each robot and time step, the energy level must not be negative.
-energy(R,E,T) :- E>=0.
+energy(R,E,T) :- energy(R,E,T-1), E>=0.
 
 % - Output -----------------------------------------------------------------------------------------
 
